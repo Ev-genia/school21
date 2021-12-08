@@ -1,5 +1,4 @@
-Milagro Larra 
-mlarra
+Milagro Larra aka mlarra
 
 ->  libft   ->  ok  ->  125%
 
