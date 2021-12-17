@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 18:07:52 by mlarra            #+#    #+#             */
-/*   Updated: 2021/12/15 10:18:12 by mlarra           ###   ########.fr       */
+/*   Updated: 2021/12/17 22:10:53 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,31 @@
 // 	return (0);
 // }
 
-
-
-int	main()
+int	main(int argc, char **argv)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int		**arr_z;
-printf("test");
-printf("ft_check_map(&arr_z): %d\n", ft_check_map(&arr_z));
-	if (ft_check_map(&arr_z) == 1)
+	int		*arr_z;
+	t_data	*data;
+
+	if (argc == 2)
 	{
-		mlx_ptr = mlx_init();
-		win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "mlx 42");
-		mlx_pixel_put(mlx_ptr, win_ptr, 500, 250, 0xFFFFFF);
-		// mlx_key_hook(win_ptr, deal_key, (void *)0);
-		mlx_loop(mlx_ptr);
+		data = (t_data *)malloc(sizeof(t_data));
+		if (!data)
+			return (0);
+		arr_z = NULL;
+		if (ft_check_map(&arr_z, argv[1], data))
+		{
+			mlx_ptr = mlx_init();
+			win_ptr = mlx_new_window(mlx_ptr, 500, 500, "mlx 42");
+			mlx_pixel_put(mlx_ptr, win_ptr, 100, 200, 0xFFFFFF);
+			// mlx_key_hook(win_ptr, deal_key, (void *)0);
+			mlx_loop(mlx_ptr);
+		}
 	}
 	else
 	{
-		return (ft_check_map(&arr_z));
+		write(2, "use file of type .fdf", 21);
+		return (0);
 	}
 }
