@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:04:23 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/14 19:05:21 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/14 19:09:48 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_get_height(char *filename)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
-// printf("fd: %d\n", fd);
 	if (fd < 0)
 		ft_exit_fd();
 	line = get_next_line(fd);
@@ -215,31 +214,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// void	ft_draw_line(t_elem elem1, t_elem elem2, t_data *data)
-// {
-// 	float	max_delta;
-// 	float	step_x;
-// 	float	step_y;
-
-// 	ft_scale_coordinate(&elem1, &elem2, data);
-// 	data->color = ft_choise_color(elem1, elem2);
-// 	ft_isometric(&elem1, data);
-// 	ft_isometric(&elem2, data);
-// 	ft_shift_coordinate(&elem1, &elem2, data);
-// 	step_x = elem2.x - elem1.x;
-// 	step_y = elem2.y - elem1.y;
-// 	max_delta = fmax(fabs(step_x), fabs(step_y));
-// 	step_x /= max_delta;
-// 	step_y /= max_delta;
-// 	while ((int)(elem2.x - elem1.x) || (int)(elem2.y - elem1.y))
-// 	{
-// 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, \
-// 			elem1.x, elem1.y, data->color);
-// 		elem1.x += step_x;
-// 		elem1.y += step_y;
-// 	}
-// }
-
 void	ft_draw_line_im(t_elem elem1, t_elem elem2, t_data *data)
 {
 	float	max_delta;
@@ -259,39 +233,10 @@ void	ft_draw_line_im(t_elem elem1, t_elem elem2, t_data *data)
 	while ((int)(elem2.x - elem1.x) || (int)(elem2.y - elem1.y))
 	{
 		my_mlx_pixel_put(data, elem1.x, elem1.y, data->color);
-			// data->mlx_ptr, data->win_ptr, \
-			// elem1.x, elem1.y, data->color);
 		elem1.x += step_x;
 		elem1.y += step_y;
 	}
 }
-
-// void	ft_draw_map(t_data *data)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	ind_i;
-// 	int	ind_j;
-
-// 	j = 0;
-// 	while (j < data->height)
-// 	{
-// 		i = 0;
-// 		while (i < data->width)
-// 		{
-// 			ind_i = j * data->width + i;
-// 			if (i < data->width - 1)
-// 			{
-// 				ft_draw_line(data->elems[ind_i], data->elems[ind_i + 1], data);
-// 			}
-// 			ind_j = (j + 1) * data->width + i;
-// 			if (j < data->height - 1)
-// 				ft_draw_line(data->elems[ind_j], data->elems[ind_i], data);
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// }
 
 int	ft_draw(t_data *data)
 {
@@ -300,22 +245,14 @@ int	ft_draw(t_data *data)
 	int	ind_i;
 	int	ind_j;
 
-// printf("scale: %d\n", data->scale);
-// printf("haight: %d\n", data->height);
-// printf("widht: %d\n", data->width);
-// printf("test1\n");
 	data->img = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height);
-// printf("test2\n");
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_lenght, &data->endian);
-// printf("test3\n");
 	j = 0;
 	while (j < data->height)
 	{
 		i = 0;
 		while (i < data->width)
 		{
-// printf("test4 ");
-// printf("%d, %d\n", j, i);
 			ind_i = j * data->width + i;
 			if (i < data->width - 1)
 			{
@@ -328,9 +265,7 @@ int	ft_draw(t_data *data)
 		}
 		j++;
 	}
-// printf("test5\n");
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-printf("test6\n");
 	mlx_destroy_image(data->mlx_ptr, data->img);
 	return (0);
 }
@@ -346,9 +281,7 @@ void	ft_get_scale(t_data *data)
 
 void	ft_get_shift(t_data *data)
 {
-	// if (data->width > data->height)
 	data->shift_x = (int)((data->w_width - data->width) / 2);
-	// else
 	data->shift_y = (int)((data->w_height - data->height) / 4);
 }
 
@@ -358,12 +291,8 @@ void	ft_init_data(t_data *data)
 	data->w_width = 1000;
 	data->w_height = 700;
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->w_width, data->w_height, "FDF");
-
-	// data->img = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height);
-	// data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_lenght, &data->endian);
-
-	ft_get_scale(data);//data->scale = 20;
-	ft_get_shift(data);//data->shift = 100;
+	ft_get_scale(data);
+	ft_get_shift(data);
 	data->angle = 0.523599;
 }
 
@@ -401,8 +330,6 @@ int	main(int argc, char **argv)
 	ft_alloc_memory(data, argv[1]);
 	ft_fill_elems(data, argv[1]);
 	ft_init_data(data);
-	// ft_draw_map(&data);
-	// mlx_hook();
 	mlx_loop_hook(data->mlx_ptr, ft_draw, data);
 	mlx_hook(data->win_ptr, 2, 1L << 0, close_win, data);
 	mlx_hook(data->win_ptr, 17, 0L, close_win_x, data);
