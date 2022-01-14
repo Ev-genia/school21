@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:04:38 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/14 18:22:24 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/14 18:53:53 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
@@ -39,6 +39,7 @@ typedef struct s_data
 	int		scale;
 	int		shift_x;
 	int		shift_y;
+	int		shift_z;
 	int		color;
 	float	angle;
 
@@ -46,8 +47,8 @@ typedef struct s_data
 	void	*win_ptr;
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_lenght;
+	int		bpp;
+	int		line_len;
 	int		endian;
 
 	int		w_width;
