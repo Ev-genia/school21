@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:04:38 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/14 18:22:24 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/17 17:21:09 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,20 @@ typedef struct s_data
 	int		w_width;
 	int		w_height;
 }	t_data;
+
+int		ft_check_map(char *filename);
+int		ft_get_height(char *filename);
+int		ft_get_width(char *line);
+void	ft_exit_arg(void);
+void	ft_exit_fd(void);
+void	ft_exit_map(void);
+void	ft_exit_memory(void);
+void	ft_alloc_memory(t_data *data, char *filename);
+void	ft_fill_elems(t_data *data, char *filename);
+int		ft_draw(t_data *data);
+void	ft_init_data(t_data *data);
+void	ft_scale_coordinate(t_elem *elem1, t_elem *elem2, t_data *data);
+void	ft_shift_coordinate(t_elem *elem1, t_elem *elem2, t_data *data);
+int		ft_choise_color(t_elem elem1, t_elem elem2);
 
 #endif

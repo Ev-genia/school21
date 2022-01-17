@@ -6,7 +6,7 @@
 #    By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 11:55:00 by mlarra            #+#    #+#              #
-#    Updated: 2022/01/14 18:22:37 by mlarra           ###   ########.fr        #
+#    Updated: 2022/01/17 18:58:28 by mlarra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,12 @@
 
 NAME		=	fdf
 
-SRCS		=	fdf.c	#map.c draw.c
+SRCS		=	fdf.c	map.c	error_exit.c	matrix.c	draw.c	init.c	\
+				utils.c
 
-SRCS_B		=	fdf_bonus.c
+SRCS_B		=	fdf_bonus.c		map_bonus.c		error_exit_bonus.c	\
+				matrix_bonus.c	draw_bonus.c	init_bonus.c	utils_bonus.c\
+				keypress_bonus.c
 
 SRCS_GNL	=	${GNL_DIR}/get_next_line.c	${GNL_DIR}/get_next_line_utils.c
 
@@ -33,6 +36,8 @@ HEADER_GNL	=	${GNL_DIR}/get_next_line.h
 OBJS		=	${SRCS:.c=.o}
 
 OBJS_GNL	=	${SRCS_GNL:.c=.o}
+
+OBJS_B		=	${SRCS_B:.c=.o}
 
 CFLAGS		=	-Wall -Wextra -Werror -g
 
@@ -58,13 +63,13 @@ GNL_DIR		=	./gnl
 ${NAME}	:	${OBJS} ${HEADER} ${OBJS_GNL} ${HEADER_GNL}
 			make -C ${LIB_FT}
 ##			gcc -I /Users/eugenia/C/school21/02_1_fdf/minilibx_macos main.c -L /Users/eugenia/C/school21/02_1_fdf/minilibx_macos -lmlx -framework OpenGL -framework AppKit
-			${CC} ${CFLAGS} -I ${LIB_MLX} ${SRCS} ${SRCS_GNL} -L ${LIB_MLX} -lmlx -L \
-			${LIB_FT} -lft ${FRAMEWORKS} -o ${NAME}
+			${CC} ${CFLAGS} -I ${LIB_MLX} ${SRCS} ${SRCS_GNL} -L ${LIB_MLX} \
+			-lmlx -L ${LIB_FT} -lft ${FRAMEWORKS} -o ${NAME}
 
 all		:	${NAME}
 
 clean	:
-			${RM} ${OBJS} ${OBJS_GNL}
+			${RM} ${OBJS} ${OBJS_GNL} ${OBJS_B}
 			make -C ${LIB_FT} clean
 
 fclean	:	clean
