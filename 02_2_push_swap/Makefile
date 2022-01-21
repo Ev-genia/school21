@@ -6,17 +6,17 @@
 #    By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 13:19:37 by mlarra            #+#    #+#              #
-#    Updated: 2022/01/20 16:34:24 by mlarra           ###   ########.fr        #
+#    Updated: 2022/01/21 16:35:19 by mlarra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	push-swap
+NAME	=	push_swap
 
-SOURCE	=	push-swap.c	ft_split.c ft_atoi.c
+SOURCE	=	push_swap.c	ft_split.c ft_atoi.c
 
 OBJ		=	${SOURCE:.c=.o}
 
-HEADER	=	push-swap.h
+HEADER	=	push_swap.h
 
 CFLAGS	=	-Wall -Wextra -Werror -g
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push-swap.c                                        :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/20 17:43:31 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/21 17:47:45 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push-swap.h"
+#include "push_swap.h"
 
 #include <stdio.h>
 
@@ -76,24 +76,46 @@ int	ft_check_symbol(char *s)
 	return (0);
 }
 
-void	ft_exit_symbol(void)
+void	ft_lstdelone(t_list *lst)
 {
-	//clear malloc
-	write(2, "Error\n", 6);
-	exit(1);
+	if (!lst)
+		return ;
+	free(lst);
 }
 
+void	ft_lstclear(t_list **lst)
+{
+	t_list	*temp;
+	t_list	*list;
+
+	list = *lst;
+	while (list)
+	{
+		temp = list->next;
+		ft_lstdelone(list);
+		list = temp;
+	}
+	*lst = NULL;
+}
+
+void	ft_exit_symbol(t_list *stak)
+{
+	ft_lstclear(&stak);
+	write(2, "Error\n", 6);
+// while (1) {};
+	exit(1);
+}
 
 t_list	*ft_fill_stak(char **argv)
 {
 	int		i;
 	int		j;
 	t_list	*new;
-	t_list	*stek;
+	t_list	*stak;
 	char	**words;
 
 	i = 1;
-	stek = NULL;
+	stak = NULL;
 	while (argv[i])
 	{
 		words = ft_split(argv[i], ' ');
@@ -101,9 +123,9 @@ t_list	*ft_fill_stak(char **argv)
 		while (words[j])
 		{
 			if (ft_check_symbol(words[j]) != 0)
-				ft_exit_symbol();
+				ft_exit_symbol(stak);
 			new = ft_lstnew(ft_atoi(words[j]));
-			ft_lstadd_back(&stek, new);
+			ft_lstadd_back(&stak, new);
 			free(words[j]);
 printf("(i) %d, (j) %d : %d\n", i, j, new->val);
 			j++;
@@ -111,25 +133,15 @@ printf("(i) %d, (j) %d : %d\n", i, j, new->val);
 		free(words);
 		i++;
 	}
-	
-// 	stek = ft_lstnew(ft_atoi(argv[1]));
-// printf("%d\n", stek->val);
-// 	i = 2;
-// 	while (argv[i])
-// 	{
-// 		new = ft_lstnew(ft_atoi(argv[i]));
-// 		ft_lstadd_back(&stek, new);
-// printf("%d: %d\n", i, new->val);
-// 		i++;
-// 	}
-	return (stek);
+	return (stak);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list	*stek_a;
+	t_list	*stak_a;
 
 	if (argc == 1)
 		ft_exit_argc();
-	stek_a = ft_fill_stak(argv);
+	stak_a = ft_fill_stak(argv);
+	
 }

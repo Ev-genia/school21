@@ -6,11 +6,11 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:01:33 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/20 15:50:22 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/21 16:36:19 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push-swap.h"
+#include "push_swap.h"
 
 int	ft_words(char const *str, char c)
 {
@@ -89,7 +89,7 @@ char	**ft_split(char const *s, char c)
 			s++;
 		ptr_words[i] = ft_wd(s, c);
 		if (ptr_words[i] == NULL)
-			return(ft_return(i, &ptr_words));
+			return (ft_return(i, &ptr_words));
 		while (*s && *s != c)
 			s++;
 		i++;

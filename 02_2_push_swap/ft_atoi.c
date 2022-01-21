@@ -6,11 +6,11 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:56:39 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/20 16:33:49 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/21 16:36:11 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push-swap.h"
+#include "push_swap.h"
 
 int	ft_isspace(char c)
 {
