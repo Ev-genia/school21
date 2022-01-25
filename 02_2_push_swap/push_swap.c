@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/21 17:47:45 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/24 19:14:13 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_check_symbol(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] < '0' || s[i] > '9')
+		if ((s[i] < '0' || s[i] > '9') && s[i] != ' ')
 			return (1);
 		i++;
 	}
@@ -122,12 +122,9 @@ t_list	*ft_fill_stak(char **argv)
 		j = 0;
 		while (words[j])
 		{
-			if (ft_check_symbol(words[j]) != 0)
-				ft_exit_symbol(stak);
 			new = ft_lstnew(ft_atoi(words[j]));
 			ft_lstadd_back(&stak, new);
 			free(words[j]);
-printf("(i) %d, (j) %d : %d\n", i, j, new->val);
 			j++;
 		}
 		free(words);
@@ -136,12 +133,124 @@ printf("(i) %d, (j) %d : %d\n", i, j, new->val);
 	return (stak);
 }
 
+void	ft_exit_argv(void)
+{
+	write(2, "Error\n", 6);
+// while (1) {};
+	exit(1);
+}
+
+void	ft_exit_malloc(void)
+{
+	write(2, "Memory don't allocated\n", 23);
+	exit(1);
+}
+
+int	*ft_fill_arr(int length, char **s)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		*ar;
+	char	**wd;
+
+	ar = (int *) malloc(sizeof(int) * length + 1);
+	if (!ar)
+		ft_exit_malloc();
+	i = 0;
+	k = 0;
+	while (s[++i] && s[i] != NULL)
+	{
+		j = -1;
+		wd = ft_split((const char *)s[i], ' ');
+		while (wd[++j])
+		{
+			ar[k] = ft_atoi(wd[j]);
+// printf("*ar[%d]: %d\n", k, ar[k]);
+			free(wd[j]);
+			k++;
+		}
+		free(wd);
+	}
+	return (ar);
+}
+
+int	ft_check_double(int *mas)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (mas[i])
+	{
+		j = 0;
+		while (mas[i + j])
+		{
+			if (mas[i] == mas[i + j])
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_get_length(char **s)
+{
+	int		k;
+	int		i;
+	int		j;
+	char	**wd;
+
+	k = 0;
+	i = 1;
+	while (s[i])
+	{
+		j = 0;
+		wd = ft_split((const char *)s[i], ' ');
+		while (wd[j])
+		{
+			k++;
+			free(wd[j]);
+			j++;
+		}
+		free(wd);
+		i++;
+	}
+	return (k);
+}
+
+int	ft_check_args(char **s)
+{
+	int	i;
+	int	len;
+	int	*arr;
+
+	i = 1;
+	while(s[i])
+	{
+		if (ft_check_symbol(s[i]) != 0)
+			ft_exit_argv();
+		i++;
+	}
+	len = ft_get_length(s);
+	arr = ft_fill_arr(len, s);
+
+	if (!ft_check_double(arr))
+		ft_exit_argv();
+	// if (!ft_check_sort(arr))
+	// 	ft_exit_sort();
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*stak_a;
 
 	if (argc == 1)
 		ft_exit_argc();
+// printf("ft_check_args(argv): %d\n", ft_check_args(argv));
+	ft_check_args(argv);
 	stak_a = ft_fill_stak(argv);
 	
 }
