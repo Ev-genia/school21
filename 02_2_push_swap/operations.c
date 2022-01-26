@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 12:41:11 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/25 16:30:32 by mlarra           ###   ########.fr       */
+/*   Created: 2022/01/25 13:11:51 by mlarra            #+#    #+#             */
+/*   Updated: 2022/01/25 16:31:23 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include <stddef.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include "push_swap.h"
 
-typedef struct s_list
+void	swap(t_list **l)
 {
-	int				val;
-	int				score;
-	struct s_list	*next;
-}	t_list;
+	t_list	*temp;
 
-char	**ft_split(char const *s, char c);
-char	*ft_strchr(const char *s, int c);
-int		ft_atoi(const char *str);
-void	swap(t_list **l);
+	temp = (*l)->next;
+	(*l)->next = (*l)->next->next;
+	temp->next = (*l);
+	(*l) = temp;
+}
 
-
-#endif
+void	push(t_list *a, t_list *b)
+{
+	
+}

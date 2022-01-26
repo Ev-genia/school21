@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 12:41:11 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/25 16:30:32 by mlarra           ###   ########.fr       */
+/*   Created: 2021/10/17 18:15:13 by mlarra            #+#    #+#             */
+/*   Updated: 2022/01/25 11:21:06 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include <stddef.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include "push_swap.h"
 
-typedef struct s_list
+char	*ft_strchr(const char *s, int c)
 {
-	int				val;
-	int				score;
-	struct s_list	*next;
-}	t_list;
+	int	i;
 
-char	**ft_split(char const *s, char c);
-char	*ft_strchr(const char *s, int c);
-int		ft_atoi(const char *str);
-void	swap(t_list **l);
-
-
-#endif
+	if (!s)
+		return ((void *)0);
+	i = 0;
+	while (s[i] != (unsigned char)c)
+	{
+		if (s[i] == '\0')
+			return ((void *)0);
+		i++;
+	}
+	return ((char *)&s[i]);
+}

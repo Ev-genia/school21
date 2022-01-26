@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/24 19:14:13 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/25 16:24:05 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	ft_check_symbol(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if ((s[i] < '0' || s[i] > '9') && s[i] != ' ')
+		if ((s[i] < '0' || s[i] > '9') && s[i] != ' ' && s[i] != '+' && \
+			s[i] != '-')
 			return (1);
 		i++;
 	}
@@ -146,6 +147,14 @@ void	ft_exit_malloc(void)
 	exit(1);
 }
 
+void	ft_exit_arr(char **str, char ***words, int **ar_int)
+{
+	free(str);
+	free(words);
+	free(ar_int);
+	ft_exit_argv();
+}
+
 int	*ft_fill_arr(int length, char **s)
 {
 	int		i;
@@ -166,6 +175,16 @@ int	*ft_fill_arr(int length, char **s)
 		while (wd[++j])
 		{
 			ar[k] = ft_atoi(wd[j]);
+			if ((ft_strchr(wd[j], '+') != 0 || ft_strchr(wd[j], '-') != 0) && ar[k] == 0)
+			{
+				//free malloc
+				// free(wd[j]);
+				// free(wd);
+				// free(ar);
+printf("er1\n");
+				ft_exit_argv();
+				// ft_exit_arr(&wd[j], &wd, &ar);
+			}
 // printf("*ar[%d]: %d\n", k, ar[k]);
 			free(wd[j]);
 			k++;
@@ -175,7 +194,7 @@ int	*ft_fill_arr(int length, char **s)
 	return (ar);
 }
 
-int	ft_check_double(int *mas)
+int	ft_check_double(int *mas, int length)
 {
 	int	i;
 	int	j;
@@ -183,11 +202,15 @@ int	ft_check_double(int *mas)
 	i = 0;
 	while (mas[i])
 	{
-		j = 0;
-		while (mas[i + j])
+		j = 1;
+		while (mas[i + j] && j < length)
 		{
+// printf("mas[%d]: %d\n", j, mas[j]);
 			if (mas[i] == mas[i + j])
-				return (1);
+				{
+// printf("mas[%d]: %d - mas[%d + %d]: %d\n", i, mas[i], i, j, mas[i + j]);
+					return (1);
+				}
 			j++;
 		}
 		i++;
@@ -220,6 +243,28 @@ int	ft_get_length(char **s)
 	return (k);
 }
 
+int	ft_check_sort(int *elem, int length)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (i < length - 1)
+	{
+// printf("%d - %d, k: %d\n", elem[i], elem[i + 1], k);
+		if (elem[i] < elem[i + 1])
+			{
+				k++;
+			}
+		i++;
+// printf("new k: %d, i: %d\n", k, i);
+	}
+	if (k == i)
+		return (0);
+	return (1);
+}
+
 int	ft_check_args(char **s)
 {
 	int	i;
@@ -230,27 +275,42 @@ int	ft_check_args(char **s)
 	while(s[i])
 	{
 		if (ft_check_symbol(s[i]) != 0)
+		{
+printf("er2\n");
 			ft_exit_argv();
+		}
 		i++;
 	}
 	len = ft_get_length(s);
+// printf("length: %d\n", len);
 	arr = ft_fill_arr(len, s);
-
-	if (!ft_check_double(arr))
+	if (ft_check_double(arr, len) != 0)
+	{
+printf("double\n");
 		ft_exit_argv();
-	// if (!ft_check_sort(arr))
-	// 	ft_exit_sort();
+	}
+// printf("ft_check_sort(arr): %d\n", ft_check_sort(arr, len));
+	if (ft_check_sort(arr, len) == 0)
+	{
+		//free(arr);
+		// ft_exit_sort();
+// while (1) {};
+printf("sort\n");
+		exit(1);
+	}
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_list	*stak_a;
+	t_list	*stak_b;
 
 	if (argc == 1)
 		ft_exit_argc();
-// printf("ft_check_args(argv): %d\n", ft_check_args(argv));
 	ft_check_args(argv);
 	stak_a = ft_fill_stak(argv);
+	stak_b = NULL;
 	
+// while (1) {};
 }
