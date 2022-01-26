@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:49:46 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 17:28:31 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/19 15:39:10 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	ft_get_width(char *line)
 	i = 0;
 	while (words[i])
 	{
-		i++;
 		free(words[i]);
+		i++;
 	}
 	free(words);
 	return (i);
@@ -68,7 +68,7 @@ int	ft_check_width(char *filename)
 		if (i != nbrs_first)
 		{
 			close(fd);
-			ft_exit_map();
+			ft_exit_map(filename);
 		}
 		line = get_next_line(fd);
 	}
@@ -80,9 +80,9 @@ int	ft_check_filename(char *s)
 {
 	int	i;
 
-	i = ft_strlen((const char*) s);
-	if (s[i - 1] != 'f' || s[i - 2] != 'd' || s[i - 3] != 'f' ||
-		s[i - 4] != '.')
+	i = ft_strlen((const char *) s);
+	if (s[i - 1] != 'f' || s[i - 2] != 'd' || s[i - 3] != 'f'
+		|| s[i - 4] != '.')
 		return (1);
 	return (0);
 }

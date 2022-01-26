@@ -6,11 +6,11 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:53:41 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 18:54:24 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/19 15:33:51 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf_bonus.h"
+#include "fdf_bonus.h"
 
 void	ft_scale_coordinate(t_elem *elem1, t_elem *elem2, t_data *data)
 {
@@ -34,4 +34,10 @@ int	ft_choise_color(t_elem elem1, t_elem elem2)
 		return (0xFFFFFF);
 	else
 		return (0x0000ff);
+}
+
+void	ft_get_addr(t_data *data)
+{
+	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, \
+		&data->endian);
 }

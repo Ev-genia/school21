@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:04:38 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 17:21:09 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/18 18:01:19 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@
 # include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
-//?
 # include "00_libft/libft.h"
 # include "gnl/get_next_line.h"
-// home
-# include "/Users/eugenia/C/school21/02_1_fdf/minilibx_macos/mlx.h"
-// school
-// # include "mlx.h"
+# include "mlx.h"
 
 typedef struct s_elem
 {
@@ -59,7 +55,7 @@ int		ft_get_height(char *filename);
 int		ft_get_width(char *line);
 void	ft_exit_arg(void);
 void	ft_exit_fd(void);
-void	ft_exit_map(void);
+void	ft_exit_map(char *filename);
 void	ft_exit_memory(void);
 void	ft_alloc_memory(t_data *data, char *filename);
 void	ft_fill_elems(t_data *data, char *filename);

@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:11:15 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 17:14:11 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/19 15:15:21 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	if (x > 0 && x < data->w_width && y > 0 && y < data->w_height)
 	{
-		dst = data->addr + (y * data->line_lenght + x * (data->bits_per_pixel / 8));
+		dst = data->addr + (y * data->line_lenght + \
+			x * (data->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
 }
 
-void	ft_draw_line_im(t_elem elem1, t_elem elem2, t_data *data)
+void	ft_draw_line(t_elem elem1, t_elem elem2, t_data *data)
 {
 	float	max_delta;
 	float	step_x;
@@ -68,24 +69,21 @@ int	ft_draw(t_data *data)
 	int	ind_j;
 
 	data->img = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_lenght, &data->endian);
-	j = 0;
-	while (j < data->height)
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
+		&data->line_lenght, &data->endian);
+	j = -1;
+	while (++j < data->height)
 	{
-		i = 0;
-		while (i < data->width)
+		i = -1;
+		while (++i < data->width)
 		{
 			ind_i = j * data->width + i;
 			if (i < data->width - 1)
-			{
-				ft_draw_line_im(data->elems[ind_i], data->elems[ind_i + 1], data);
-			}
+				ft_draw_line(data->elems[ind_i], data->elems[ind_i + 1], data);
 			ind_j = (j + 1) * data->width + i;
 			if (j < data->height - 1)
-				ft_draw_line_im(data->elems[ind_j], data->elems[ind_i], data);
-			i++;
+				ft_draw_line(data->elems[ind_j], data->elems[ind_i], data);
 		}
-		j++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img);

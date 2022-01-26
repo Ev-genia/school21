@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:50:07 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 19:00:39 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/18 13:10:57 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_get_scale(t_data *data)
 {
-
 	if (data->width > data->height)
 		data->scale = (int)(data->w_height / data->height / 2);
 	else
@@ -31,12 +30,11 @@ void	ft_get_shift(t_data *data)
 void	ft_init_data(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
-	data->w_width = 1000;//1280;
-	data->w_height = 500;//720;
+	data->w_width = 1280;
+	data->w_height = 720;
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->w_width, \
 		data->w_height, "FDF");
 	ft_get_scale(data);
 	ft_get_shift(data);
-
 	data->angle = 0.523599;
 }

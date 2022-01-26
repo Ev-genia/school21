@@ -6,15 +6,9 @@
 #    By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 11:55:00 by mlarra            #+#    #+#              #
-#    Updated: 2022/01/17 18:58:28 by mlarra           ###   ########.fr        #
+#    Updated: 2022/01/19 18:05:29 by mlarra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# all	:
-# 	gcc -I /Users/eugenia/C/school21/02_1_fdf/minilibx_macos \
-# 	main.c map.c ft_split.c ft_atoi.c get_next_line.c get_next_line_utils.c -L \
-# 	/Users/eugenia/C/school21/02_1_fdf/minilibx_macos \
-# 	-lmlx -framework OpenGL -framework AppKit -g
 
 NAME		=	fdf
 
@@ -39,18 +33,16 @@ OBJS_GNL	=	${SRCS_GNL:.c=.o}
 
 OBJS_B		=	${SRCS_B:.c=.o}
 
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 
 FRAMEWORKS	=	-framework OpenGL -framework AppKit
 
 CC			=	gcc
 
 RM			=	rm -f
-# home
-LIB_MLX		=	/Users/eugenia/C/school21/02_1_fdf/minilibx_macos
-# home
-# LIB_FT		=	/Users/eugenia/C/school21/02_1_fdf/00_libft
-# school
+
+LIB_MLX		=	/Users/mlarra/Documents/02_1_fdf/minilibx_macos
+
 LIB_FT		=	./00_libft
 
 GNL_DIR		=	./gnl
@@ -62,7 +54,6 @@ GNL_DIR		=	./gnl
 
 ${NAME}	:	${OBJS} ${HEADER} ${OBJS_GNL} ${HEADER_GNL}
 			make -C ${LIB_FT}
-##			gcc -I /Users/eugenia/C/school21/02_1_fdf/minilibx_macos main.c -L /Users/eugenia/C/school21/02_1_fdf/minilibx_macos -lmlx -framework OpenGL -framework AppKit
 			${CC} ${CFLAGS} -I ${LIB_MLX} ${SRCS} ${SRCS_GNL} -L ${LIB_MLX} \
 			-lmlx -L ${LIB_FT} -lft ${FRAMEWORKS} -o ${NAME}
 
@@ -80,5 +71,9 @@ re		:	fclean all
 
 bonus	:	${OBJS_B} ${HEADER_B} ${OBJS_GNL} ${HEADER_GNL}
 			make -C ${LIB_FT}
-			${CC} ${CFLAGS} -I ${LIB_MLX} ${SRCS_B} ${SRCS_GNL} -L ${LIB_MLX} \
-			-lmlx -L ${LIB_FT} -lft ${FRAMEWORKS} -o ${NAME}
+			${CC} ${CFLAGS} -I ${LIB_MLX} ${SRCS_B} ${SRCS_GNL} \
+			-L ${LIB_MLX} -lmlx -L ${LIB_FT} -lft ${FRAMEWORKS} -o ${NAME}
+
+norm	:	
+			norminette ${SRCS} ${SRCS_B} ${SRCS_GNL} ${LIB_FT} ${HEADER} \
+			${HEADER_B} ${HEADER_GNL}

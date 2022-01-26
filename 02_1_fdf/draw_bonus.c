@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 18:43:09 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 18:51:22 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/19 15:34:46 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	ft_draw(t_data *data)
 	int	ind_j;
 
 	data->img = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, \
-		&data->endian);
+	ft_get_addr(data);
+	mlx_hook(data->win_ptr, 2, 0, deal_key, data);
 	j = -1;
 	while (++j < data->height)
 	{
@@ -72,7 +72,7 @@ int	ft_draw(t_data *data)
 		}
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	// mlx_destroy_image(data->mlx_ptr, data->img);
+	mlx_destroy_image(data->mlx_ptr, data->img);
 	return (0);
 }
 
@@ -106,8 +106,7 @@ int	ft_draw_XoY(t_data *data)
 	int	ind_j;
 
 	data->img = mlx_new_image(data->mlx_ptr, data->w_width, data->w_height);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, \
-		&data->endian);
+	ft_get_addr(data);
 	j = -1;
 	while (++j < data->height)
 	{
@@ -123,6 +122,6 @@ int	ft_draw_XoY(t_data *data)
 		}
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
-	// mlx_destroy_image(data->mlx_ptr, data->img);
+	mlx_destroy_image(data->mlx_ptr, data->img);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 16:56:36 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 16:58:27 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/18 18:01:33 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	ft_exit_fd(void)
 	exit(1);
 }
 
-void	ft_exit_map(void)
+void	ft_exit_map(char *filename)
 {
 	write(2, "map is not valid\n", 17);
+	free(filename);
 	exit(1);
 }
 

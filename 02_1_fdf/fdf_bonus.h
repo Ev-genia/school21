@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:04:38 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/17 19:01:39 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/19 15:33:47 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@
 # include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
-//?
 # include "00_libft/libft.h"
 # include "gnl/get_next_line.h"
-// home
-# include "/Users/eugenia/C/school21/02_1_fdf/minilibx_macos/mlx.h"
-// school
-// # include "mlx.h"
+# include "mlx.h"
 
 typedef struct s_elem
 {
@@ -72,5 +68,7 @@ void	ft_scale_coordinate(t_elem *elem1, t_elem *elem2, t_data *data);
 void	ft_shift_coordinate(t_elem *elem1, t_elem *elem2, t_data *data);
 int		ft_choise_color(t_elem elem1, t_elem elem2);
 int		deal_key(int key, t_data *data);
+int		close_win_x(t_data *data);
+void	ft_get_addr(t_data *data);
 
 #endif
