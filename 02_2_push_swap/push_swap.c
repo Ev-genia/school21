@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/25 16:24:05 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/26 17:34:47 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int	*ft_fill_arr(int length, char **s)
 				// free(wd[j]);
 				// free(wd);
 				// free(ar);
-printf("er1\n");
+printf("text1\n");
 				ft_exit_argv();
 				// ft_exit_arr(&wd[j], &wd, &ar);
 			}
@@ -265,32 +265,53 @@ int	ft_check_sort(int *elem, int length)
 	return (1);
 }
 
-int	ft_check_args(char **s)
+int	ft_check_min_max(int *arr, int len)
 {
 	int	i;
-	int	len;
-	int	*arr;
+
+	i = 0;
+	while (arr[i] && i < len)
+	{
+		if (arr[i] >= 2147483647 || arr[i] < -2147483648)
+		{
+			if ((unsigned int)arr[i] > 2147483647)
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_check_args(char **s, t_sort *inf)
+{
+	int	i;
+	// int	*arr;
 
 	i = 1;
 	while(s[i])
 	{
 		if (ft_check_symbol(s[i]) != 0)
 		{
-printf("er2\n");
+printf("text2\n");
 			ft_exit_argv();
 		}
 		i++;
 	}
-	len = ft_get_length(s);
+	inf->len_arr = ft_get_length(s);
 // printf("length: %d\n", len);
-	arr = ft_fill_arr(len, s);
-	if (ft_check_double(arr, len) != 0)
+	inf->arr = ft_fill_arr(inf->len_arr, s);
+	if (ft_check_double(inf->arr, inf->len_arr) != 0)
 	{
 printf("double\n");
 		ft_exit_argv();
 	}
+	if (ft_check_min_max(inf->arr, inf->len_arr) != 0)
+	{
+printf("min or max\n");
+		ft_exit_argv();
+	}
 // printf("ft_check_sort(arr): %d\n", ft_check_sort(arr, len));
-	if (ft_check_sort(arr, len) == 0)
+	if (ft_check_sort(inf->arr, inf->len_arr) == 0)
 	{
 		//free(arr);
 		// ft_exit_sort();
@@ -298,19 +319,90 @@ printf("double\n");
 printf("sort\n");
 		exit(1);
 	}
+	
 	return (0);
 }
+
+void	swap_int(int *a, int *b)
+{
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+int	ft_get_med(t_sort *data)
+{
+	int	*sort_arr;
+	int	i;
+
+	sort_arr = malloc(sizeof(int) * data->len_arr);
+	if (!sort_arr)
+		ft_exit_malloc();
+	i = 0;
+	while (data->arr[i] && i < data->len_arr)
+	{
+		sort_arr[i] = data->arr[i];
+		i++;
+	}
+i = 0;
+while (sort_arr[i] && i < data->len_arr)
+{
+	printf("%d, ", sort_arr[i]);
+	i++;
+}
+	i = 0;
+	while (sort_arr[i] && i - 1 < data->len_arr)
+	{
+		if (sort_arr[i] > sort_arr[i + 1])
+			swap_int(&sort_arr[i], &sort_arr[i + 1]);
+		i++;
+	}
+	
+	data->med = 0;
+	free(sort_arr);
+	return (data->med);
+}
+
+void	ft_init_info(t_sort *info)
+{
+	int	i;
+	// int	min;
+	// int	max;
+
+	i = 0;
+	info->min = info->arr[i];
+	info->max = info->arr[i];
+	while (info->arr[i] && i < info->len_arr)
+	{
+		if (info->arr[i] < info->min)
+			info->min = info->arr[i];
+		if (info->arr[i] > info->max)
+			info->max = info->arr[i];
+		i++;
+	}
+printf("min: %d, max: %d\n", info->min, info->max);
+	info->med = ft_get_med(info);
+}
+
+// void	ft_sort_three_elem(t_list	*list, t_sort inf)
+// {
+
+// }
 
 int	main(int argc, char **argv)
 {
 	t_list	*stak_a;
 	t_list	*stak_b;
+	t_sort	info;
 
 	if (argc == 1)
 		ft_exit_argc();
-	ft_check_args(argv);
+	ft_check_args(argv, &info);
 	stak_a = ft_fill_stak(argv);
 	stak_b = NULL;
-	
+	ft_init_info(&info);
+	// ft_sort_three_elem(stak_a, info);
 // while (1) {};
 }
