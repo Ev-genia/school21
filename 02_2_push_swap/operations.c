@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:11:51 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/26 16:20:45 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/27 16:49:29 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ void	swap(t_list **l)
 	(*l) = temp;
 }
 
+void	sa(t_list **s_a)
+{
+	swap(s_a);
+	write(1, "sa\n", 3);
+}
+
+void	sb(t_list **s_b)
+{
+	swap(s_b);
+	write(1, "sb\n", 3);
+}
+
+void	ss(t_list **s_a, t_list **s_b)
+{
+	swap(s_a);
+	swap(s_b);
+	write(1, "ss\n", 3);
+}
+
 void	push(t_list **a, t_list **b)
 {
 	t_list	*temp;
@@ -32,6 +51,18 @@ void	push(t_list **a, t_list **b)
 	*a = (*a)->next;
 	temp->next = *b;
 	*b = temp;
+}
+
+void	pa(t_list **s_b, t_list **s_a)
+{
+	push(s_b, s_a);
+	write(1, "pa\n", 3);
+}
+
+void	pb(t_list **s_a, t_list **s_b)
+{
+	push(s_a, s_b);
+	write(1, "pb\n", 3);
 }
 
 void	rotate(t_list **l)
@@ -46,6 +77,25 @@ void	rotate(t_list **l)
 	(*l) = temp;
 }
 
+void	ra(t_list **s_a)
+{
+	rotate(s_a);
+	write(1, "ra\n", 3);
+}
+
+void	rb(t_list **s_b)
+{
+	rotate(s_b);
+	write(1, "rb\n", 3);
+}
+
+void	rr(t_list **s_a, t_list **s_b)
+{
+	rotate(s_a);
+	rotate(s_b);
+	write(1, "rr\n", 3);
+}
+
 void	reverse(t_list **l)
 {
 	t_list	*temp;
@@ -58,4 +108,23 @@ void	reverse(t_list **l)
 	(*l)->next = NULL;
 	last->next = temp;
 	(*l) = last;
+}
+
+void	rra(t_list **s_a)
+{
+	reverse(s_a);
+	write(1, "rra\n", 4);
+}
+
+void	rrb(t_list **s_b)
+{
+	reverse(s_b);
+	write(1, "rrb\n", 4);
+}
+
+void	rrr(t_list **s_a, t_list **s_b)
+{
+	reverse(s_a);
+	reverse(s_b);
+	write(1, "rrr\n", 4);
 }

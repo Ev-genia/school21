@@ -50,7 +50,7 @@ int	main()
 	printf("%d, %d, %d\n", a->val, a->next->val, a->next->next->val);
 	/*swap(&a);
 	printf("%d, %d, %d\n", a->val, a->next->val, a->next->next->val);
-	printf("---------------------\n");
+	printf("---------------------\n");*/
 	b = ft_lstnew(1);
 	ft_lstadd_back(&b, ft_lstnew(3));
 	ft_lstadd_back(&b, ft_lstnew(9));
@@ -59,10 +59,10 @@ int	main()
 	printf("%d, %d\n", a->val, a->next->val);
 	printf("%d, %d, %d, %d\n", b->val, b->next->val, b->next->next->val, b->next->next->next->val);
 	printf("---------------------\n");
-	rotate(&a);
-	printf("%d, %d, %d\n", a->val, a->next->val, a->next->next->val);
-	printf("---------------------\n");*/
-	reverse(&a);
+	/*rotate(&a);
 	printf("%d, %d, %d\n", a->val, a->next->val, a->next->next->val);
 	printf("---------------------\n");
+	reverse(&a);
+	printf("%d, %d, %d\n", a->val, a->next->val, a->next->next->val);
+	printf("---------------------\n");*/
 }

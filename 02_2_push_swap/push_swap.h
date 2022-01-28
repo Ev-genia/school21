@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:41:11 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/26 16:40:31 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/27 17:18:30 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,23 @@ typedef struct s_sort
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 int		ft_atoi(const char *str);
+void	sa(t_list **s_a);
+void	sb(t_list **s_b);
+void	ss(t_list **s_a, t_list **s_b);
+
 void	swap(t_list **l);
+void	pa(t_list **s_b, t_list **s_a);
+void	pb(t_list **s_a, t_list **s_b);
+
 void	push(t_list **a, t_list **b);
-void	rotate(t_list **l);
-void	reverse(t_list **l);
+void	ra(t_list **s_a);
+void	rb(t_list **s_b);
+void	rr(t_list **s_a, t_list **s_b);
+// void	rotate(t_list **l);
+void	rra(t_list **s_a);
+void	rrb(t_list **s_b);
+void	rrr(t_list **s_a, t_list **s_b);
+// void	reverse(t_list **l);
 t_list	*ft_lstlast(t_list *lst);
 
 
