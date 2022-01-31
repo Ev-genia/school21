@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:41:11 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/27 17:18:30 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/28 15:07:39 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ void	push(t_list **a, t_list **b);
 void	ra(t_list **s_a);
 void	rb(t_list **s_b);
 void	rr(t_list **s_a, t_list **s_b);
-// void	rotate(t_list **l);
+
+void	rotate(t_list **l);
 void	rra(t_list **s_a);
 void	rrb(t_list **s_b);
 void	rrr(t_list **s_a, t_list **s_b);
-// void	reverse(t_list **l);
+
+void	reverse(t_list **l);
 t_list	*ft_lstlast(t_list *lst);
 
 

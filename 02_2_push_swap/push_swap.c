@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/27 17:40:42 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/28 17:26:49 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -365,38 +365,145 @@ void	ft_init_info(t_sort *info)
 void	ft_sort_three_elem(t_list **list, t_sort inf)
 {
 
-t_list	*stack_a_copy;
+// t_list	*stack_a_copy;
+// printf("\ninput 3_elems:\n");
+// stack_a_copy = *list;
+// while (stack_a_copy)
+// {
+// 	printf("%d, ", stack_a_copy->val);
+// 	stack_a_copy = stack_a_copy->next;
+// }
+// printf("\n");
 
 	if (((*list)->val == inf.min && (*list)->next->val == inf.max) ||
 		((*list)->val == inf.med && (*list)->next->val == inf.min) ||
 		((*list)->val == inf.max && (*list)->next->val == inf.med))
-	sa(list);
+		sa(list);
+	else
+		return ;
 
-stack_a_copy = *list;
-printf("\n3 elems:\n");
-while (stack_a_copy)
-{
-	printf("%d, ", stack_a_copy->val);
-	stack_a_copy = stack_a_copy->next;
+// stack_a_copy = *list;
+// printf("\n3 elems:\n");
+// while (stack_a_copy)
+// {
+// 	printf("%d, ", stack_a_copy->val);
+// 	stack_a_copy = stack_a_copy->next;
+// }
+// printf("\n");
+
 }
-printf("\n");
+
+int	ft_lstsize(t_list *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_sort_all(t_list **a, t_list **b, t_sort data)
+{
+	int		i;
+
+// t_list	*tmp;
+// tmp = *a;
+// printf("\ninput ft_sort_all a:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+// tmp = *b;
+// printf("\ninput ft_sort_all b:\n");
+// printf("%p\n", tmp);
+// while (tmp)
+// {
+// 	printf("%d, %p", tmp->val, tmp->next);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+	i = 0;
+	while ((*a)->next != NULL && i < data.len_arr)
+	{
+// printf("(*a)->val: %d\n", (*a)->val);
+		if ((*a)->val == data.min || (*a)->val == data.med || (*a)->val == data.max)
+		// {
+			ra(a);
+			// data.len_arr--;
+		// }
+		else
+			pb(a, b);
+		i++;
+	}
+
+// tmp = *a;
+// printf("\noutput ft_sort_all a:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+// tmp = *b;
+// printf("\noutput ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+
+	ft_sort_three_elem(a, data);
+
+// printf("\n");
+}
+
+void	score_rotate(t_list **l)
+{
+	t_list	*temp;
+	t_list	*last;
+printf("test2\n");
+// t_list	*tmp;
+// tmp = l;
+// printf("\ninput rotate:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+	temp = (*l)->next;
+	last = ft_lstlast(*l);
+	last->next = *l;
+	(*l)->next = NULL;
+	(*l) = temp;
+printf("test3\n");
+// tmp = l;
+// printf("\noutput rotate:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
 
 }
 
-void	ft_sort_all(t_list **sa, t_list **sb, t_sort data)
+int	ft_get_score_ra(t_list *a, int min)
 {
+	int	i;
 
 t_list	*tmp;
-tmp = *sa;
-printf("\nft_sort_all a:\n");
-while (tmp)
-{
-	printf("%d, ", tmp->val);
-	tmp = tmp->next;
-}
-printf("\n");
-tmp = *sb;
-printf("\nft_sort_all b:\n");
+tmp = a;
+printf("\ninput get_score_ra:\n");
 while (tmp)
 {
 	printf("%d, ", tmp->val);
@@ -405,25 +512,57 @@ while (tmp)
 printf("\n");
 
 
-	while ((*sa)->next->next->next != NULL )
+
+	i = 0;
+	while (a->val != min)
 	{
-		pb(sa, sb);
-		// if ((*sb)->val < data.med)
-		// 	rb(sb);
+printf("a->val: %d\n", a->val);
+		score_rotate(&a);
+		// a = a->next;
+		i++;
 	}
-	ft_sort_three_elem(sa, data);
+printf("i: %d\n", i);
+	return (i);
+}
 
+int	ft_get_score_rra(t_list *a, int min)
+{
+	t_list	*begin;
+	int		i;
 
-tmp = *sa;
-printf("\n2ft_sort_all a:\n");
+	begin = a;
+	i = 0;
+	while (begin->val != min)
+	{
+printf("1begin->val: %d, ", begin->val);
+		reverse(&begin);
+printf("2begin->val: %d\n", begin->val);
+		i++;
+	}
+
+printf("i: %d\n", i);
+
+	return (i);
+}
+
+void	ft_finish_sort(t_list **a, t_sort data)
+{
+	int	score_ra;
+	int	score_rra;
+	t_list	*a_copy;
+
+t_list	*tmp;
+tmp = *a;
+printf("\ninput finish sort a:\n");
 while (tmp)
 {
 	printf("%d, ", tmp->val);
 	tmp = tmp->next;
 }
 printf("\n");
-tmp = *sb;
-printf("\n2ft_sort_all b:\n");
+
+tmp = *a;
+printf("\n1meedle finish sort a:\n");
 while (tmp)
 {
 	printf("%d, ", tmp->val);
@@ -431,8 +570,40 @@ while (tmp)
 }
 printf("\n");
 
+	a_copy = *a;
+	score_ra = ft_get_score_ra(a_copy, data.min);
 
+printf("score_ra: %d\n", score_ra);
 
+tmp = *a;
+printf("\n2meedle finish sort a:\n");
+while (tmp)
+{
+	printf("%d, ", tmp->val);
+	tmp = tmp->next;
+}
+printf("\n");
+
+	a_copy = *a;
+	score_rra = 5;//ft_get_score_rra(a_copy, data.min);
+	
+	if (score_ra < score_rra)
+	{
+		while ((*a)->val != data.min && score_ra > 0)
+		{
+// printf("(*a)->val: %d\n", (*a)->val);
+			ra(a);
+			score_ra--;
+		}
+	}
+	else
+	{
+		while ((*a)->val != data.min && score_rra > 0)
+		{
+			rra(a);
+			score_rra--;
+		}
+	}
 }
 
 int	main(int argc, char **argv)
@@ -441,7 +612,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_b;
 	t_sort	info;
 
-// t_list	*stack_a_copy;
+t_list	*stack_a_copy;
 
 	if (argc == 1)
 		ft_exit_argc();
@@ -459,21 +630,35 @@ int	main(int argc, char **argv)
 
 	stack_b = NULL;
 	ft_init_info(&info);
-// printf("len: %d, min:, %d, med: %d, max: %d\n", info.len_arr, info.min, info.med, info.max);
+printf("len: %d, min:, %d, med: %d, max: %d\n", info.len_arr, info.min, info.med, info.max);
 	if (info.len_arr <= 3)
 		ft_sort_three_elem(&stack_a, info);
 	else
 		ft_sort_all(&stack_a, &stack_b, info);
 
-printf("\nstack_a sort:\n");
-while (stack_a)
+
+stack_a_copy = stack_a;
+printf("\nstack_a meedle main:\n");
+while (stack_a_copy)
 {
-	printf("%d, ", stack_a->val);
-	stack_a = stack_a->next;
+	printf("%d, ", stack_a_copy->val);
+	stack_a_copy = stack_a_copy->next;
+}
+printf("\n");
+printf("--\n");
+
+	ft_finish_sort(&stack_a, info);
+
+stack_a_copy = stack_a;
+printf("\nstack_a main:\n");
+while (stack_a_copy)
+{
+	printf("%d, ", stack_a_copy->val);
+	stack_a_copy = stack_a_copy->next;
 }
 printf("\n");
 
-printf("\nstack_b sort:\n");
+printf("\nstack_b main:\n");
 while (stack_b)
 {
 	printf("%d, ", stack_b->val);

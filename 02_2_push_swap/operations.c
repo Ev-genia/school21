@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:11:51 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/27 16:49:29 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/28 15:31:16 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	push(t_list **a, t_list **b)
 
 	temp = *a;
 	*a = (*a)->next;
-	temp->next = *b;
+	if (*b)
+		temp->next = *b;
+	else
+		temp->next = NULL;
 	*b = temp;
 }
 
@@ -70,11 +73,31 @@ void	rotate(t_list **l)
 	t_list	*temp;
 	t_list	*last;
 
+// t_list	*tmp;
+// tmp = *l;
+// printf("\ninput rotate:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
 	temp = (*l)->next;
 	last = ft_lstlast(*l);
 	last->next = *l;
 	(*l)->next = NULL;
 	(*l) = temp;
+
+// tmp = *l;
+// printf("\noutput rotate:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
 }
 
 void	ra(t_list **s_a)
