@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/31 17:00:55 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/01 15:56:12 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -410,23 +410,23 @@ int	ft_get_a_r(t_list *a, t_list *b)
 {
 	int		i;
 
-t_list	*tmp;
-tmp = a;
-printf("\ninput get_a_r a:\n");
-while (tmp)
-{
-	printf("%d, ", tmp->val);
-	tmp = tmp->next;
-}
-printf("\n");
-tmp = b;
-printf("\ninput get_a_r b:\n");
-while (tmp)
-{
-	printf("%d, ", tmp->val);
-	tmp = tmp->next;
-}
-printf("\n");
+// t_list	*tmp;
+// tmp = a;
+// printf("\ninput get_a_r a:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+// tmp = b;
+// printf("\ninput get_a_r b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
 
 	i = 0;
 	while (a)
@@ -439,42 +439,71 @@ printf("\n");
 	return (i);
 }
 
-int	ft_get_b_r(t_list *a, t_list *b)
-{
-	int		i;
+// int	ft_get_b_r(t_list *a, t_list *b)
+// {
+// 	int		i;
 
-t_list	*tmp;
-tmp = a;
-printf("\ninput get_b_r a:\n");
-while (tmp)
+// 	i = 0;
+// 	while (b)
+// 	{
+// 		if ((b->val < a->val) && (ft_lstlast(a)->val < b->val))
+// 			return (i);
+// 		b = b->next;
+// 		i++;
+// 	}
+// 	return (i);
+// }
+
+int	ft_get_b_r(t_list *lst, int nbr)
 {
-	printf("%d, ", tmp->val);
-	tmp = tmp->next;
-}
-printf("\n");
-tmp = b;
-printf("\ninput get_b_r b:\n");
-while (tmp)
-{
-	printf("%d, ", tmp->val);
-	tmp = tmp->next;
-}
-printf("\n");
+	int	i;
 
 	i = 0;
-	while (b)
+	while (lst->val != nbr)
 	{
-		if ((b->val < a->val) && (ft_lstlast(a)->val < b->val))
-			return (i);
-		b = b->next;
+		lst = lst->next;
 		i++;
 	}
 	return (i);
 }
 
+int	ft_get_min_score(t_list elem)
+{
+	if (elem.score_a_r < elem.score_a_rr)
+	{
+		if (elem.score_b_r < elem.score_b_rr)
+			elem.min_score = elem.score_a_r + elem.score_b_r;
+		else
+			elem.min_score = elem.score_a_r + elem.score_b_rr;
+	}
+	else
+	{
+		if (elem.score_b_r < elem.score_b_rr)
+			elem.min_score = elem.score_a_rr + elem.score_b_r;
+		else
+			elem.min_score = elem.score_a_rr + elem.score_b_rr;
+	}
+	return (elem.min_score);
+}
+
+int	ft_find_min(t_list *stack)
+{
+	int	min;
+
+	min = stack->min_score;
+	while (stack)
+	{
+		if (stack->min_score < min)
+			min = stack->min_score;
+		stack = stack->next;
+	}
+	return (min);
+}
+
 void	ft_sort_all(t_list **a, t_list **b, t_sort data)
 {
 	int		i;
+	int		min;
 	t_list	*b_begin;
 
 // t_list	*tmp;
@@ -541,20 +570,158 @@ void	ft_sort_all(t_list **a, t_list **b, t_sort data)
 	b_begin = *b;
 	while (*b)
 	{
+
+// tmp = *b;
+// printf("\nwhile ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
 		(*b)->score_a_r = ft_get_a_r(*a, *b);
 		(*b)->score_a_rr = ft_lstsize(*a) - (*b)->score_a_r;
 
-// printf("(*b)->val: %d, (*a)->val: %d\n", (*b)->val, (*a)->val);
-printf("score_a_r: %d, score_a_rr: %d\n", (*b)->score_a_r, (*b)->score_a_rr);
+// tmp = *a;
+// printf("\nstack a:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
 
-		(*b)->score_b_r = ft_get_b_r(*a, *b);
-		(*b)->score_b_rr = ft_lstsize(*b) - (*b)->score_b_r;
-printf("score_b_r: %d, score_b_rr: %d\n", (*b)->score_b_r, (*b)->score_b_rr);
+// tmp = *b;
+// printf("\nstack b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+// printf("val: %d, score_a_r: %d, score_a_rr: %d\n", (*b)->val, (*b)->score_a_r, (*b)->score_a_rr);
+
+		// (*b)->score_b_r = ft_get_b_r(*a, *b);
+		(*b)->score_b_r = ft_get_b_r(b_begin, (*b)->val);
+		// (*b)->score_b_rr = ft_lstsize(*b) - (*b)->score_b_r;
+		(*b)->score_b_rr = ft_lstsize(b_begin) - (*b)->score_b_r;
+
+// printf("score_b_r: %d, score_b_rr: %d\n", (*b)->score_b_r, (*b)->score_b_rr);
+
 		(*b) = (*b)->next;
 	}
 	(*b) = b_begin;
 
+// tmp = *b;
+// printf("\nbetween while ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+	
+	while(*b)
+	{
 
+// tmp = *b;
+// printf("\ninsile while ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+	
+
+		// (*b) = b_begin;
+		while (*b)
+		{
+
+// tmp = *b;
+// printf("\ninsile whilewhile ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+// tmp = *a;
+// printf("\ninsile whilewhile ft_sort_all a:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");	
+
+			(*b)->min_score = ft_get_min_score(**b);
+// printf("min score: %d\n", (*b)->min_score);
+			(*b) = (*b)->next;
+		}
+		(*b) = b_begin;
+
+// tmp = *b;
+// printf("\nbetw 2 while ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+		min = ft_find_min(*b);
+// printf("min: %d\n", min);
+
+// printf("b_begin->val: %d\n", b_begin->val);
+		// (*b) = b_begin;
+		while ((*b)->min_score != min)
+		{
+			(*b) = (*b)->next;
+			// b_begin = (*b);
+		}
+		b_begin = (*b)->next;
+
+// printf("b_begin->next->val: %d\n", b_begin->val);
+// tmp = b_begin;
+// printf("\nb_begin:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+		if ((*b)->min_score == 0)
+			pa(b, a);
+		// else
+		// {
+
+		// }
+		(*b) = b_begin;
+
+// tmp = *b;
+// printf("\nafter while ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
+
+	}
+
+
+// tmp = *b;
+// printf("\noutput ft_sort_all b:\n");
+// while (tmp)
+// {
+// 	printf("%d, ", tmp->val);
+// 	tmp = tmp->next;
+// }
+// printf("\n");
 
 
 
@@ -706,7 +873,7 @@ while (stack_b)
 printf("\n");
 
 	ft_lstclear(&stack_a);
-	// ft_lstclear(&stack_b);
+	ft_lstclear(&stack_b);
 
 // while (1) {};
 }

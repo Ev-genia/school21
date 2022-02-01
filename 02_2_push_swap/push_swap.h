@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:41:11 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/31 15:48:11 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/01 10:13:57 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_list
 	int				score_a_rr;
 	int				score_b_r;
 	int				score_b_rr;
+	int				min_score;
 	struct s_list	*next;
 }	t_list;
 
