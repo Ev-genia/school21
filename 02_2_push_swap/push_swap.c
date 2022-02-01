@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/01 15:56:12 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/01 17:31:00 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,53 +406,20 @@ int	ft_lstsize(t_list *lst)
 	return (i);
 }
 
-int	ft_get_a_r(t_list *a, t_list *b)
+int	ft_get_a_r(t_list *lst, int nbr)
 {
-	int		i;
-
-// t_list	*tmp;
-// tmp = a;
-// printf("\ninput get_a_r a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-// tmp = b;
-// printf("\ninput get_a_r b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
+	int	i;
 
 	i = 0;
-	while (a)
+
+//!!! условие входа в цикл
+	while (nbr < lst->val)
 	{
-		if ((a->val > b->val) && (ft_lstlast(a)->val < b->val))
-			return (i);
-		a = a->next;
+		lst = lst->next;
 		i++;
 	}
 	return (i);
 }
-
-// int	ft_get_b_r(t_list *a, t_list *b)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	while (b)
-// 	{
-// 		if ((b->val < a->val) && (ft_lstlast(a)->val < b->val))
-// 			return (i);
-// 		b = b->next;
-// 		i++;
-// 	}
-// 	return (i);
-// }
 
 int	ft_get_b_r(t_list *lst, int nbr)
 {
@@ -500,35 +467,44 @@ int	ft_find_min(t_list *stack)
 	return (min);
 }
 
+void	ft_score_init(t_list *a, t_list **b)
+{
+	t_list	*b_begin;
+t_list	*tmp;
+
+	b_begin = *b;
+	while (*b)
+	{
+tmp = a;
+printf("\nstack a:\n");
+while (tmp != NULL)
+{
+	printf("%d, ", tmp->val);
+	tmp = tmp->next;
+}
+printf("\n");
+		(*b)->score_a_r = ft_get_a_r(a, (*b)->val);
+		(*b)->score_a_rr = ft_lstsize(a) - (*b)->score_a_r;
+		(*b)->score_b_r = ft_get_b_r(b_begin, (*b)->val);
+		(*b)->score_b_rr = ft_lstsize(b_begin) - (*b)->score_b_r;
+printf("val: %d, score_a_r: %d, score_a_rr: %d\n", (*b)->val, (*b)->score_a_r, (*b)->score_a_rr);
+printf("score_b_r: %d, score_b_rr: %d\n", (*b)->score_b_r, (*b)->score_b_rr);
+		(*b) = (*b)->next;
+	}
+}
+
 void	ft_sort_all(t_list **a, t_list **b, t_sort data)
 {
 	int		i;
 	int		min;
+	t_list	*a_begin;
 	t_list	*b_begin;
 
-// t_list	*tmp;
-// tmp = *a;
-// printf("\ninput ft_sort_all a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-// tmp = *b;
-// printf("\ninput ft_sort_all b:\n");
-// printf("%p\n", tmp);
-// while (tmp)
-// {
-// 	printf("%d, %p", tmp->val, tmp->next);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
+t_list	*tmp;
 
 	i = 0;
 	while ((*a)->next != NULL && i < data.len_arr)
 	{
-// printf("(*a)->val: %d\n", (*a)->val);
 		if ((*a)->val == data.min || (*a)->val == data.med || (*a)->val == data.max)
 		{
 			ra(a);
@@ -538,144 +514,37 @@ void	ft_sort_all(t_list **a, t_list **b, t_sort data)
 			pb(a, b);
 		i++;
 	}
-
-// tmp = *a;
-// printf("\noutput ft_sort_all a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
-// tmp = *b;
-// printf("\noutput ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-
 	ft_sort_three_elem(a, data);
-
-// tmp = *b;
-// printf("\noutput ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
+	a_begin = *a;
 	b_begin = *b;
-	while (*b)
-	{
 
-// tmp = *b;
-// printf("\nwhile ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
+tmp = *b;
+printf("\nstack b:\n");
+while (tmp != NULL)
+{
+	printf("%d, ", tmp->val);
+	tmp = tmp->next;
+}
 
-		(*b)->score_a_r = ft_get_a_r(*a, *b);
-		(*b)->score_a_rr = ft_lstsize(*a) - (*b)->score_a_r;
-
-// tmp = *a;
-// printf("\nstack a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-
-// tmp = *b;
-// printf("\nstack b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
-// printf("val: %d, score_a_r: %d, score_a_rr: %d\n", (*b)->val, (*b)->score_a_r, (*b)->score_a_rr);
-
-		// (*b)->score_b_r = ft_get_b_r(*a, *b);
-		(*b)->score_b_r = ft_get_b_r(b_begin, (*b)->val);
-		// (*b)->score_b_rr = ft_lstsize(*b) - (*b)->score_b_r;
-		(*b)->score_b_rr = ft_lstsize(b_begin) - (*b)->score_b_r;
-
-// printf("score_b_r: %d, score_b_rr: %d\n", (*b)->score_b_r, (*b)->score_b_rr);
-
-		(*b) = (*b)->next;
-	}
-	(*b) = b_begin;
-
-// tmp = *b;
-// printf("\nbetween while ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-	
-	while(*b)
-	{
-
-// tmp = *b;
-// printf("\ninsile while ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-	
-
-		// (*b) = b_begin;
+	// while(*b)
+	// {
+		// while (*b)
+		// {
+		// 	(*b)->score_a_r = ft_get_a_r(*a, (*b)->val);
+		// 	(*b)->score_a_rr = ft_lstsize(*a) - (*b)->score_a_r;
+		// 	(*b)->score_b_r = ft_get_b_r(b_begin, (*b)->val);
+		// 	(*b)->score_b_rr = ft_lstsize(b_begin) - (*b)->score_b_r;
+		// 	(*b) = (*b)->next;
+		// }
+		ft_score_init(*a, b);
+		(*b) = b_begin;
 		while (*b)
 		{
-
-// tmp = *b;
-// printf("\ninsile whilewhile ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
-// tmp = *a;
-// printf("\ninsile whilewhile ft_sort_all a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");	
-
 			(*b)->min_score = ft_get_min_score(**b);
-// printf("min score: %d\n", (*b)->min_score);
 			(*b) = (*b)->next;
 		}
 		(*b) = b_begin;
-
-// tmp = *b;
-// printf("\nbetw 2 while ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
 		min = ft_find_min(*b);
-// printf("min: %d\n", min);
-
-// printf("b_begin->val: %d\n", b_begin->val);
 		// (*b) = b_begin;
 		while ((*b)->min_score != min)
 		{
@@ -684,15 +553,13 @@ void	ft_sort_all(t_list **a, t_list **b, t_sort data)
 		}
 		b_begin = (*b)->next;
 
-// printf("b_begin->next->val: %d\n", b_begin->val);
-// tmp = b_begin;
-// printf("\nb_begin:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
+tmp = *b;
+printf("\nstack b end_all_sort:\n");
+while (tmp != NULL)
+{
+	printf("%d, ", tmp->val);
+	tmp = tmp->next;
+}
 
 		if ((*b)->min_score == 0)
 			pa(b, a);
@@ -701,46 +568,12 @@ void	ft_sort_all(t_list **a, t_list **b, t_sort data)
 
 		// }
 		(*b) = b_begin;
-
-// tmp = *b;
-// printf("\nafter while ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
-	}
-
-
-// tmp = *b;
-// printf("\noutput ft_sort_all b:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
-
-
-// printf("\n");
+	// }
 }
 
 int	ft_finish_score_ra(t_list *a, int min)
 {
 	int	i;
-
-// t_list	*tmp;
-// tmp = a;
-// printf("\ninput get_score_ra:\n");
-// while (tmp != NULL)
-// {
-	// printf("%d, ", tmp->val);
-	// tmp = tmp->next;
-// }
-// printf("\n");
 
 	i = 0;
 	while (a->val != min)
@@ -748,7 +581,6 @@ int	ft_finish_score_ra(t_list *a, int min)
 		a = a->next;
 		i++;
 	}
-// printf("i: %d\n", i);
 	return (i);
 }
 
@@ -758,46 +590,14 @@ void	ft_finish_sort(t_list **a, t_sort data)
 	int	score_rra;
 	t_list	*a_copy;
 
-// t_list	*tmp;
-// tmp = *a;
-// printf("\ninput finish sort a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
-// tmp = *a;
-// printf("\n1meedle finish sort a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
-	score_ra = ft_finish_score_ra(*a, data.min);
-
-// printf("score_ra: %d\n", score_ra);
-
-// tmp = *a;
-// printf("\n2meedle finish sort a:\n");
-// while (tmp)
-// {
-// 	printf("%d, ", tmp->val);
-// 	tmp = tmp->next;
-// }
-// printf("\n");
-
+	// score_ra = ft_finish_score_ra(*a, data.min);
+	score_ra = ft_get_b_r(*a, data.min);
 	a_copy = *a;
 	score_rra = ft_lstsize(a_copy) - score_ra;
-// printf("score_rra: %d\n", score_rra);
 	if (score_ra < score_rra)
 	{
 		while ((*a)->val != data.min && score_ra > 0)
 		{
-// printf("(*a)->val: %d\n", (*a)->val);
 			ra(a);
 			score_ra--;
 		}
