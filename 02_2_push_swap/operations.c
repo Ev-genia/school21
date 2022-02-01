@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:11:51 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/28 15:31:16 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/01/31 13:19:57 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,16 @@ void	push(t_list **a, t_list **b)
 {
 	t_list	*temp;
 
-	temp = *a;
-	*a = (*a)->next;
-	if (*b)
-		temp->next = *b;
-	else
-		temp->next = NULL;
-	*b = temp;
+	if (*a)
+	{
+		temp = *a;
+		*a = (*a)->next;
+		if (*b)
+			temp->next = *b;
+		else
+			temp->next = NULL;
+		*b = temp;
+	}
 }
 
 void	pa(t_list **s_b, t_list **s_a)
