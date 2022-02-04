@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:11:51 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/03 16:19:38 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/04 16:04:29 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,23 @@ void	pb(t_list **s_a, t_list **s_b)
 	write(1, "pb\n", 3);
 }
 
+// void	rb(t_list **b)
+// {
+// 	t_list	*tmp;
+// 	t_list	*last;
+
+// 	if (!(*b) || !(*b)->next)
+// 		return ;
+// 	last = *b;
+// 	while (last->next)
+// 		last = last->next;
+// 	tmp = *b;
+// 	*b = (*b)->next;
+// 	last->next = tmp;
+// 	tmp->next = 0;
+// 	write(1, "rb\n", 3);
+// }
+
 void	rotate(t_list **l)
 {
 	t_list	*temp;
@@ -86,11 +103,19 @@ void	rotate(t_list **l)
 // }
 // printf("\n");
 
-	temp = (*l)->next;
+	if (!(*l) || !(*l)->next)
+		return ;
 	last = ft_lstlast(*l);
-	last->next = *l;
-	(*l)->next = NULL;
-	(*l) = temp;
+	temp = *l;
+	*l = (*l)->next;
+	last->next = temp;
+	temp->next = NULL;
+	
+	// temp = (*l)->next;
+	// last = ft_lstlast(*l);
+	// last->next = *l;
+	// (*l)->next = NULL;
+	// l = &temp;
 
 // tmp = *l;
 // printf("\noutput rotate:\n");
