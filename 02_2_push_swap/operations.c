@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 13:11:51 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/04 16:04:29 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/07 11:29:12 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,6 @@ void	pb(t_list **s_a, t_list **s_b)
 	write(1, "pb\n", 3);
 }
 
-// void	rb(t_list **b)
-// {
-// 	t_list	*tmp;
-// 	t_list	*last;
-
-// 	if (!(*b) || !(*b)->next)
-// 		return ;
-// 	last = *b;
-// 	while (last->next)
-// 		last = last->next;
-// 	tmp = *b;
-// 	*b = (*b)->next;
-// 	last->next = tmp;
-// 	tmp->next = 0;
-// 	write(1, "rb\n", 3);
-// }
 
 void	rotate(t_list **l)
 {
@@ -147,10 +131,35 @@ void	rr(t_list **s_a, t_list **s_b)
 	write(1, "rr\n", 3);
 }
 
+// void	rra(t_list **a)
+// {
+// 	t_list	*last_prev;
+
+// 	if (!*a || !(*a)->next)
+// 		return ;
+// 	last_prev = *a;
+// 	while (last_prev->next->next)
+// 		last_prev = last_prev->next;
+// 	last_prev->next->next = *a;
+// 	*a = last_prev->next;
+// 	last_prev->next = 0;
+// 	write(1, "rra\n", 4);
+// }
+
 void	reverse(t_list **l)
 {
 	t_list	*temp;
-	t_list	*last;
+	t_list		*last;
+	// t_list	*last_prev;
+
+	if (!(*l) || !(*l)->next)
+		return ;
+	// last_prev = *l;
+	// while (last_prev->next->next != NULL)
+	// 	last_prev = last_prev->next;
+	// last_prev->next->next = *l;
+	// *l = last_prev->next;
+	// last_prev->next = 0;
 
 	temp = *l;
 	last = ft_lstlast(*l);
