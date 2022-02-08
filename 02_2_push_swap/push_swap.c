@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/07 12:44:39 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/08 10:37:08 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,17 @@ int	*ft_fill_arr(int length, char **s)
 		}
 		free(wd);
 	}
+
+// printf("\n");
+// i = 0;
+// while (i < length)
+// {
+// 	printf("ar");
+// 	printf("[%d]: %d, ", i, ar[i]);
+// 	i++;
+// }
+// printf("\n");
+
 	return (ar);
 }
 
@@ -300,7 +311,7 @@ void	swap_int(int *a, int *b)
 	int	tmp;
 
 	tmp = *a;
-	*a = 
+	*a = *b;
 	*b = tmp;
 }
 
@@ -316,8 +327,19 @@ int	ft_get_med(t_sort *data)
 	i = -1;
 	while (++i < data->len_arr)
 		sort_arr[i] = data->arr[i];
+
+// printf("\n");
+// i = 0;
+// while (i < data->len_arr)
+// {
+// 	printf("data->arr");
+// 	printf("[%d]: %d, ", i, data->arr[i]);
+// 	i++;
+// }
+// printf("\n");
+
 	j = -1;
-	while (++j < data->len_arr - 1)
+	while (++j < data->len_arr)
 	{
 		i = 0;
 		while (i < data->len_arr - 1)
@@ -327,6 +349,18 @@ int	ft_get_med(t_sort *data)
 			i++;
 		}
 	}
+
+// printf("\n");
+// printf("data->len_arr / 2: %d\n", data->len_arr / 2);
+// i = 0;
+// while (i < data->len_arr)
+// {
+// 	printf("test");
+// 	printf("[%d]: %d, ", i, sort_arr[i]);
+// 	i++;
+// }
+// printf("\n");
+
 	data->med = sort_arr[data->len_arr / 2];
 	free(sort_arr);
 	return (data->med);
@@ -497,10 +531,36 @@ t_list	*ft_find_min(t_list *stack)
 	return (min);
 }
 
+void	ft_func_rotate(int count, t_list **a, void (func)(t_list **))
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		func(a);
+		i++;
+	}
+
+}
+
+void	ft_func_rotate2(int count, t_list **a, t_list **b, void (func2)(t_list **, t_list **))
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		func2(a, b);
+		// rr(a_begin, b_begin);
+		i++;;
+	}
+	}
+
 void	ft_choice_rotate(t_list **a_begin, t_list **b_begin)
 {
 	t_list	*min;
-	int		i;
+	// int		i;
 
 // t_list	*tmp;
 
@@ -537,102 +597,113 @@ void	ft_choice_rotate(t_list **a_begin, t_list **b_begin)
 // printf("test\n");
 		if (min->score_b_r <= min->score_b_rr)
 		{
-			if (min->score_a_r > min->score_b_r)
+			if (min->score_a_r >= min->score_b_r)
 			{
-				i = 0;
-				while (i < min->score_b_r)
-				{
-					rr(a_begin, b_begin);
-					i++;;
-				}
-				i = 0;
-				while (i < (min->score_a_r - min->score_b_r))
-				{
-					ra(a_begin);
-					i++;
-				}
+				// i = 0;
+				// while (i < min->score_b_r)
+				// {
+				// 	rr(a_begin, b_begin);
+				// 	i++;;
+				// }
+				ft_func_rotate2(min->score_b_r, a_begin, b_begin, rr);
+				// i = 0;
+				// while (i < (min->score_a_r - min->score_b_r))
+				// {
+				// 	ra(a_begin);
+				// 	i++;
+				// }
+				ft_func_rotate(min->score_a_r - min->score_b_r, a_begin, ra);
 			}
 			else
 			{
-				i = 0;
-				while (i < min->score_a_r)
-				{
-					rr(a_begin, b_begin);
-					i++;
-				}
-				i = 0;
-				while (i < (min->score_b_r - min->score_a_r))
-				{
-					rb(b_begin);
-					i++;
-				}
+				// i = 0;
+				// while (i < min->score_a_r)
+				// {
+				// 	rr(a_begin, b_begin);
+				// 	i++;
+				// }
+				ft_func_rotate2(min->score_a_r, a_begin, b_begin, rr);
+				// i = 0;
+				// while (i < (min->score_b_r - min->score_a_r))
+				// {
+				// 	rb(b_begin);
+				// 	i++;
+				// }
+				ft_func_rotate(min->score_b_r - min->score_a_r, b_begin, rb);
 			}
-
 		}
 		else
 		{
-			i = 0;
-			while (i < min->score_a_r)
-			{
-				ra(a_begin);
-				i++;
-			}
-			i = 0;
-			while (i < min->score_b_rr)
-			{
-				rrb(b_begin);
-				i++;
-			}
+			// i = 0;
+			// while (i < min->score_a_r)
+			// {
+			// 	ra(a_begin);
+			// 	i++;
+			// }
+			ft_func_rotate(min->score_a_r, a_begin, ra);
+			// i = 0;
+			// while (i < min->score_b_rr)
+			// {
+			// 	rrb(b_begin);
+			// 	i++;
+			// }
+			ft_func_rotate(min->score_b_rr, b_begin, rrb);
 		}
 	}
 	else
 	{
 		if (min->score_b_r <= min->score_b_rr)
 		{
-			i = 0;
-			while (i < min->score_b_r)
-			{
-				rb(b_begin);
-				i++;
-			}
-			i = 0;
-			while (i < min->score_a_rr)
-			{
-				rra(a_begin);
-				i++;
-			}
+			// i = 0;
+			// while (i < min->score_b_r)
+			// {
+			// 	rb(b_begin);
+			// 	i++;
+			// }
+			ft_func_rotate(min->score_b_r, b_begin, rb);
+			// i = 0;
+			// while (i < min->score_a_rr)
+			// {
+			// 	rra(a_begin);
+			// 	i++;
+			// }
+			ft_func_rotate(min->score_a_rr, a_begin, rra);
 		}
 		else
 		{
-			if (min->score_a_rr > min->score_b_rr)
+			if (min->score_a_rr >= min->score_b_rr)
 			{
-				i = 0;
-				while (i < min->score_b_rr)
-				{
-					rrr(a_begin, b_begin);
-					i++;
-				}
-				i = 0;
-				while (i < (min->score_a_rr - min->score_b_rr > 0))
-				{
-					rra(a_begin);
-					i++;
-				}
+				// i = 0;
+				// while (i < min->score_b_rr)
+				// {
+				// 	rrr(a_begin, b_begin);
+				// 	i++;
+				// }
+				ft_func_rotate2(min->score_b_rr, a_begin, b_begin, rrr);
+				// i = 0;
+				// while (i < (min->score_a_rr - min->score_b_rr))
+				// {
+				// 	rra(a_begin);
+				// 	i++;
+				// }
+				ft_func_rotate(min->score_a_rr - min->score_b_rr, a_begin, rra);
 			}
 			else
 			{
-				i = 0;
-				while (i < min->score_a_rr)
-				{
-					rrr(a_begin, b_begin);
-					i++;
-				}
-				i = 0;
-				while (i < (min->score_b_rr - min->score_a_rr))
-				{
-					rrb(b_begin);
-					i++;
-				}
+				// i = 0;
+				// while (i < min->score_a_rr)
+				// {
+				// 	rrr(a_begin, b_begin);
+				// 	i++;
+				// }
+				ft_func_rotate2(min->score_a_rr, a_begin, b_begin, rrr);
+				// i = 0;
+				// while (i < (min->score_b_rr - min->score_a_rr))
+				// {
+				// 	rrb(b_begin);
+				// 	i++;
+				// }
+				ft_func_rotate(min->score_b_rr - min->score_a_rr, b_begin, rrb);
 			}
 		}
 	}
@@ -648,21 +719,28 @@ void	ft_init_min_score(t_list *l)
 	}
 }
 
-
 void	ft_sort_all(t_list **a, t_list **b, t_sort data)
 {
-	int		i;
+	int	i;
 
 // t_list	*tmp;
 
-	i = 0;
-	while (i < data.len_arr)
+	// i = 0;
+	// while (i < data.len_arr)
+	i = data.len_arr;
+	while (data.len_arr > 3)
 	{
 		if ((*a)->val == data.min || (*a)->val == data.med || (*a)->val == data.max)
 			ra(a);
 		else
+		{
 			pb(a, b);
-		i++;
+			if ((*b)->val > data.med && (*b)->next && i > 6)
+				rb(b);
+			// i++;
+			data.len_arr--;
+		}
+		// i++;
 	}
 	ft_sort_three_elem(a, data);
 
