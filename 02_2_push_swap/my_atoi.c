@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   my_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:56:39 by mlarra            #+#    #+#             */
-/*   Updated: 2022/01/21 16:36:11 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/10 02:31:33 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_isspace(char c)
 		|| c == ' ');
 }
 
-int	ft_atoi(const char *str)
+int	my_atoi(const char *str)
 {
 	int					minus;
 	unsigned long int	nbr;
@@ -30,15 +30,17 @@ int	ft_atoi(const char *str)
 		minus = -1;
 	if (*str == '-' || *str == '+')
 		str++;
+	if (*str < '0' || *str > '9')
+		ft_exit_argv();
 	nbr = 0;
 	while (*str >= '0' && *str <= '9')
 	{
 		nbr = nbr * 10 + (*str - '0');
-		if (nbr > 9223372036854775807 && minus == 1)
-			return (-1);
-		if (nbr > 9223372036854775807 && minus == -1)
-			return (0);
+		if ((nbr > 2147483647 && minus == 1) || (nbr > 2147483648 && minus == -1))
+				ft_exit_argv();
 		str++;
 	}
+	if (*str && ft_isspace(*str) == 0)
+		ft_exit_argv();
 	return ((int)nbr * minus);
 }
