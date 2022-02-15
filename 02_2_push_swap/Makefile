@@ -6,46 +6,63 @@
 #    By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 13:19:37 by mlarra            #+#    #+#              #
-#    Updated: 2022/02/10 02:31:10 by mlarra           ###   ########.fr        #
+#    Updated: 2022/02/14 16:22:47 by mlarra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	push_swap
+NAME		=	push_swap
 
-SOURCE	=	push_swap.c	ft_split.c		my_atoi.c	op_swap.c	op_push.c\
-			op_rotate.c	op_reverse.c	lst_utils.c	exit_func.c	check_func.c\
-			sort_func.c	score_func.c	utils.c
+NAME_B		=	checker
 
-OBJ		=	${SOURCE:.c=.o}
+SOURCE		=	push_swap.c	ft_split.c		my_atoi.c	op_swap.c	op_push.c\
+				op_rotate.c	op_reverse.c	lst_utils.c	exit_func.c\
+				check_func.c	sort_func.c	score_func.c	utils.c
 
-HEADER	=	push_swap.h
+SOURCE_B	=	push_swap_bonus.c	check_func_bonus.c	ft_split_bonus.c\
+				lst_utils_bonus.c	exit_func_bonus.c	my_atoi_bonus.c\
+				op_push_swap_bonus.c	op_rotates_bonus.c	utils_bonus.c
 
-CFLAGS	=	-Wall -Wextra -Werror -g
+OBJ			=	${SOURCE:.c=.o}
 
-CC		=	gcc
+OBJ_B		=	${SOURCE_B:.c=.o}
 
-RM		=	rm -f
+HEADER		=	push_swap.h
 
-.PHONY	:	all clean fclean re bonus norm
+HEADER_B	=	push_swap_bonus.h
 
-.o		:	%.c ${HEADER}
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+CFLAGS		=	-Wall -Wextra -Werror -g
 
-${NAME}	:	${OBJ} ${HEADER}
-			${CC} ${CFLAGS} ${SOURCE} -o ${NAME}
+CC			=	gcc
 
-all		:	${NAME}
+RM			=	rm -f
 
-clean	:
-			${RM} ${OBJ}
+.PHONY		:	all clean fclean re bonus norm
 
-fclean	:	clean
-			${RM} ${NAME}
+.o			:	%.c ${HEADER} ${HEADER_B}
+				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-re		:	fclean all
+${NAME}		:	${OBJ} ${HEADER}
+				${CC} ${CFLAGS} ${SOURCE} -o ${NAME}
 
-# bonus	:	${OBJ_B} ${HEADER_B}
-# 			${CC} ${CFLAGS} ${SOURCE_B} -o ${NAME}
+${NAME_B}	:	${OBJ_B} ${HEADER_B}
+				${CC} ${CFLAGS} ${SOURCE_B} -o ${NAME_B}
 
-norm	:
-			norminette ${SOURCE} ${HEADER}
+all			:	${NAME}
+
+clean		:
+				${RM} ${OBJ}
+				${RM} ${OBJ_B}
+
+fclean		:	clean
+				${RM} ${NAME}
+				${RM} ${NAME_B}
+
+re			:	fclean all
+
+bonus		:	${NAME_B}
+
+norm		:
+				norminette ${SOURCE}
+				norminette -R CheckDefine ${HEADER}
+				norminette ${SOURCE_B}
+				norminette -R CheckDefine ${HEADER_B}

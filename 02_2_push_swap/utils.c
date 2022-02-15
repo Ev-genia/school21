@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:43:42 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/10 02:27:08 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 10:15:34 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,19 @@ int	ft_get_med(t_sort *data)
 
 void	ft_func_rotate(int count, t_list **a, void (func)(t_list **))
 {
-	int	i;
-
-	i = 0;
-	while (i < count)
+	while (count > 0)
 	{
 		func(a);
-		i++;
+		count--;
 	}
 }
 
 void	ft_func_rotate2(int count, t_list **a, t_list **b, void (func2)(t_list **, t_list **))
 {
-	int	i;
-
-	i = 0;
-	while (i < count)
+	while (count > 0)
 	{
 		func2(a, b);
-		i++;
+		count--;
 	}
 }
 
@@ -73,8 +67,8 @@ t_list	*ft_find_min(t_list *stack)
 	min = stack;
 	while (stack->next)
 	{
-		if (min->min_score > stack->min_score)
-			min = stack;
+		if (min->min_score > stack->next->min_score)
+			min = stack->next;
 		stack = stack->next;
 	}
 	return (min);

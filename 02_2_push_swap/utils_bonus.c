@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 12:40:06 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 10:19:48 by mlarra           ###   ########.fr       */
+/*   Created: 2022/02/14 16:20:54 by mlarra            #+#    #+#             */
+/*   Updated: 2022/02/14 16:24:03 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 t_list	*ft_fill_stack(char **argv)
 {
@@ -64,41 +64,36 @@ int	ft_get_length(char **s)
 	return (k);
 }
 
-void	ft_init_info(t_sort *info)
+int	get_next_line(char **line)
+{
+	int		i;
+	int		j;
+	char	*buf;
+
+	buf = (char*) malloc(sizeof(char) * 4);
+	if (!buf)
+		ft_exit_argc();
+	i = 0;
+	j = read(0, &buf[i], 1);
+	while (j > 0 && buf[i] != '\0' && buf[i] != '\n')
+	{
+		i++;
+		j = read(0, &buf[i], 1);
+	}
+	buf[i] = '\0';
+	*line = buf;
+	return (j);
+}
+
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
 	i = 0;
-	info->min = info->arr[i];
-	info->max = info->arr[i];
-	while (i < info->len_arr)
+	while (lst)
 	{
-		if (info->arr[i] < info->min)
-			info->min = info->arr[i];
-		if (info->arr[i] > info->max)
-			info->max = info->arr[i];
+		lst = lst->next;
 		i++;
 	}
-	info->med = ft_get_med(info);
-}
-
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_sort	info;
-
-	if (argc == 1)
-		ft_exit_argc();
-	ft_check_args(argv, &info);
-	stack_a = ft_fill_stack(argv);
-	stack_b = NULL;
-	ft_init_info(&info);
-	if (info.len_arr <= 3)
-		ft_sort_three_elem(&stack_a, &info);
-	else
-		ft_sort_all(&stack_a, &stack_b, &info);
-	ft_finish_sort(&stack_a, &info);
-	ft_lstclear(&stack_a);
-	ft_lstclear(&stack_b);
+	return (i);
 }

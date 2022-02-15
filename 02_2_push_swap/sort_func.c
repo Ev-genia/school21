@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:27:31 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/10 01:54:34 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 10:18:41 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	ft_if_no(t_list *min, t_list **a_begin, t_list **b_begin)
 {
 	if (min->score_b_r <= min->score_b_rr)
 	{
-		ft_func_rotate(min->score_b_r, b_begin, rb);
 		ft_func_rotate(min->score_a_rr, a_begin, rra);
+		ft_func_rotate(min->score_b_r, b_begin, rb);
 	}
 	else
 	{
@@ -87,7 +87,7 @@ void	ft_sort_all(t_list **a, t_list **b, t_sort *data)
 	while (i > 3)
 	{
 		pb(a, b);
-		if ((*b)->val > data->med && (*b)->next)
+		if ((*b)->val > data->med && ft_lstsize(*b) > 2)
 			rb(b);
 		i--;
 	}
