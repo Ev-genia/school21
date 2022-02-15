@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:06:05 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 12:08:22 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:58:28 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,6 @@ int	ft_check_symbol(char *s)
 		i++;
 	}
 	return (0);
-}
-
-int	ft_check_sort(int *elem, int length)
-{
-	int	i;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while (i < length - 1)
-	{
-		if (elem[i] < elem[i + 1])
-				k++;
-		i++;
-	}
-	if (k == i)
-		return (0);
-	return (1);
 }
 
 int	*ft_fill_arr(int length, char **s)
@@ -105,11 +87,6 @@ int	ft_check_args(char **s, t_sort *inf)
 	{
 		free(inf->arr);
 		ft_exit_argv();
-	}
-	if (ft_check_sort(inf->arr, inf->len_arr) == 0)
-	{
-		free(inf->arr);
-		exit(0);
 	}
 	return (0);
 }

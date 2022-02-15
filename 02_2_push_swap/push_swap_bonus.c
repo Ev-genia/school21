@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 11:52:03 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 12:06:43 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:53:35 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	ft_commands(const char *s, t_list **a_begin, t_list **b_begin)
 	else if (ft_strncmp(s, "rrr", 4) == 0)
 		rrr(a_begin, b_begin);
 	else
-		ft_exit_error(s);
+		ft_exit_error((char *)s);
 }
 
 int	ft_check_sort_list(t_list *lst)
