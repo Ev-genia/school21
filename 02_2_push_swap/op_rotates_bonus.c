@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:00:00 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/14 16:02:42 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:12:26 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rr(t_list **s_a, t_list **s_b)
 void	reverse(t_list **l)
 {
 	t_list	*temp;
-	t_list		*last;
+	t_list	*last;
 
 	if (!(*l) || !(*l)->next)
 		return ;

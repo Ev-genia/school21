@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:41:11 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/10 02:31:12 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:14:33 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	ft_sort_all(t_list **a, t_list **b, t_sort *data);
 void	ft_finish_sort(t_list **a, t_sort *data);
 
 void	ft_func_rotate(int count, t_list **a, void (func)(t_list **));
-void	ft_func_rotate2(int count, t_list **a, t_list **b, void (func2)(t_list **, t_list **));
+void	ft_func_rotate2(int count, t_list **a, t_list **b,
+			void (func2)(t_list **, t_list **));
 void	ft_find_local_min(t_list *tmp, t_sort *data);
 void	ft_score_init(t_list *a, t_list *b, t_sort *data);
 t_list	*ft_find_min(t_list *stack);

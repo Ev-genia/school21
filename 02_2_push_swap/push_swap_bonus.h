@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 11:52:28 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/14 16:24:57 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:07:04 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		ft_get_length(char **s);
 void	ft_exit_argv(void);
 void	ft_exit_argc(void);
 void	ft_exit_malloc(void);
+void	ft_exit_error(char *str);
 
 t_list	*ft_lstnew(int content);
 void	ft_lstadd_back(t_list **lst, t_list *new);

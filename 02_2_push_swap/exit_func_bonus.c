@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:39:00 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/14 13:23:53 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:08:59 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_exit_argc(void)
 {
-	// write(2, "./push-swap {ARG}\n", 18);
 	exit(1);
 }
 
@@ -37,10 +36,8 @@ void	ft_exit_malloc(void)
 	exit(1);
 }
 
-void	ft_exit_arr(char **str, char ***words, int **ar_int)
+void	ft_exit_error(char *str)
 {
 	free(str);
-	free(words);
-	free(ar_int);
 	ft_exit_argv();
 }

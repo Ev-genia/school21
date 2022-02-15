@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:43:42 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 10:15:34 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:58:47 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	ft_func_rotate(int count, t_list **a, void (func)(t_list **))
 	}
 }
 
-void	ft_func_rotate2(int count, t_list **a, t_list **b, void (func2)(t_list **, t_list **))
+void	ft_func_rotate2(int count, t_list **a, t_list **b,
+	void (func2)(t_list **, t_list **))
 {
 	while (count > 0)
 	{

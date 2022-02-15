@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:06:05 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/14 12:43:42 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:08:22 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_check_symbol(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if ((s[i] < '0' || s[i] > '9') && s[i] != ' ' && s[i] != '+' && s[i] != '-')
+		if ((s[i] < '0' || s[i] > '9') && s[i] != ' ' && s[i] != '+'
+			&& s[i] != '-')
 			ft_exit_argv();
 		i++;
 	}
@@ -96,7 +97,7 @@ int	ft_check_args(char **s, t_sort *inf)
 	int	i;
 
 	i = 0;
-	while(s[++i])
+	while (s[++i])
 		ft_check_symbol(s[i]);
 	inf->len_arr = ft_get_length(s);
 	inf->arr = ft_fill_arr(inf->len_arr, s);

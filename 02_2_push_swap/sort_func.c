@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:27:31 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 10:18:41 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 11:57:53 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_sort_three_elem(t_list **list, t_sort *inf)
 {
-	int	meedle;
+	int		meedle;
 	t_list	*tmp;
 
 	tmp = *list;
@@ -26,9 +26,9 @@ void	ft_sort_three_elem(t_list **list, t_sort *inf)
 			meedle = tmp->val;
 		tmp = tmp->next;
 	}
-	if (((*list)->val == inf->min && (*list)->next->val == inf->max) ||
-		((*list)->val == meedle && (*list)->next->val == inf->min) ||
-		((*list)->val == inf->max && (*list)->next->val == meedle))
+	if (((*list)->val == inf->min && (*list)->next->val == inf->max)
+		|| ((*list)->val == meedle && (*list)->next->val == inf->min)
+		|| ((*list)->val == inf->max && (*list)->next->val == meedle))
 		sa(list);
 	else
 		return ;
@@ -92,7 +92,7 @@ void	ft_sort_all(t_list **a, t_list **b, t_sort *data)
 		i--;
 	}
 	ft_sort_three_elem(a, data);
-	while(*b)
+	while (*b)
 	{
 		ft_score_init(*a, *b, data);
 		min = ft_find_min(*b);

@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:20:54 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/14 16:24:03 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 12:13:05 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	get_next_line(char **line)
 	int		j;
 	char	*buf;
 
-	buf = (char*) malloc(sizeof(char) * 4);
+	buf = (char *) malloc(sizeof(char) * 4);
 	if (!buf)
 		ft_exit_argc();
 	i = 0;
