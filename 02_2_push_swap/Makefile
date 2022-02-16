@@ -6,7 +6,7 @@
 #    By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 13:19:37 by mlarra            #+#    #+#              #
-#    Updated: 2022/02/15 13:23:02 by mlarra           ###   ########.fr        #
+#    Updated: 2022/02/16 15:54:15 by mlarra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ RM			=	rm -f
 
 .PHONY		:	all clean fclean re bonus norm
 
-.o			:	%.c ${HEADER} ${HEADER_B}
+%.o			:	%.c ${HEADER} ${HEADER_B}
 				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}		:	${OBJ} ${HEADER}
