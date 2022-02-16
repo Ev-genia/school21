@@ -6,7 +6,7 @@
 #    By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/20 13:19:37 by mlarra            #+#    #+#              #
-#    Updated: 2022/02/15 12:17:30 by mlarra           ###   ########.fr        #
+#    Updated: 2022/02/15 13:23:02 by mlarra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ re			:	fclean all
 bonus		:	${NAME_B}
 
 norm		:
-				norminette -R CheckForbiddenSourceHeader ${SOURCE}
-				norminette -R CheckDefine ${HEADER}
-				norminette -R CheckForbiddenSourceHeader ${SOURCE_B}
-				norminette -R CheckDefine ${HEADER_B}
+				norminette ${SOURCE}
+				norminette ${HEADER}
+				norminette ${SOURCE_B}
+				norminette ${HEADER_B}
