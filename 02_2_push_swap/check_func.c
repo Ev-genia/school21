@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:06:05 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 11:52:29 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 16:20:26 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ int	ft_check_double(int *mas, int length)
 	int	j;
 
 	i = 0;
-	while (mas[i])
+	while (i < length)
 	{
-		j = 1;
-		while (mas[i + j] && j < length)
+		j = i + 1;
+		while (j < length)
 		{
-			if (mas[i] == mas[i + j])
+			if (mas[i] == mas[j])
 				return (1);
 			j++;
 		}
@@ -101,7 +101,7 @@ int	ft_check_args(char **s, t_sort *inf)
 		ft_check_symbol(s[i]);
 	inf->len_arr = ft_get_length(s);
 	inf->arr = ft_fill_arr(inf->len_arr, s);
-	if (ft_check_double(inf->arr, inf->len_arr) != 0)
+	if (ft_check_double(inf->arr, inf->len_arr) == 1)
 	{
 		free(inf->arr);
 		ft_exit_argv();

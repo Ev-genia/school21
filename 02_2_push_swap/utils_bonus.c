@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 16:20:54 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 12:13:05 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/16 00:33:22 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	get_next_line(char **line)
 
 	buf = (char *) malloc(sizeof(char) * 4);
 	if (!buf)
-		ft_exit_argc();
+		ft_exit_malloc();
 	i = 0;
 	j = read(0, &buf[i], 1);
 	while (j > 0 && buf[i] != '\0' && buf[i] != '\n')

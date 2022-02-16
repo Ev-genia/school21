@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:06:05 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 12:58:28 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 14:59:35 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	ft_check_double(int *mas, int length)
 	int	j;
 
 	i = 0;
-	while (mas[i])
+	while (i < length)
 	{
 		j = 1;
-		while (mas[i + j] && j < length)
+		while (j < length)
 		{
 			if (mas[i] == mas[i + j])
 				return (1);

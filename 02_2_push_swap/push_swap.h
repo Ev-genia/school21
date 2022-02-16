@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:41:11 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 12:14:33 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/15 16:28:47 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	rra(t_list **s_a);
 void	rrb(t_list **s_b);
 void	rrr(t_list **s_a, t_list **s_b);
 t_list	*ft_lstlast(t_list *lst);
-void	ft_exit_argc(void);
 void	ft_exit_symbol(t_list *stack);
 void	ft_exit_argv(void);
 void	ft_exit_malloc(void);
