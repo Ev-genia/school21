@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:06:05 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 16:20:26 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/18 15:00:22 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_check_sort(int *elem, int length)
 	while (i < length - 1)
 	{
 		if (elem[i] < elem[i + 1])
-				k++;
+			k++;
 		i++;
 	}
 	if (k == i)

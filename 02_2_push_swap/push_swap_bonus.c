@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 11:52:03 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/16 10:42:06 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/18 17:08:37 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_main_checker(t_list **a, t_list **b)
 		ft_commands((const char *)str, a, b);
 		free(str);
 	}
+	free(str);
 	if (ft_check_sort_list(*a, *b) == 0)
 		write(1, "OK\n", 3);
 	else

@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:56:39 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 16:06:28 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/18 14:59:27 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	my_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		nbr = nbr * 10 + (*str - '0');
-		if ((nbr > 2147483647 && minus == 1) || (nbr > 2147483648 && minus == -1))
+		if ((nbr > 2147483647 && minus == 1)
+			|| (nbr > 2147483648 && minus == -1))
 			ft_exit_argv();
 		str++;
 	}

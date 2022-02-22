@@ -6,17 +6,32 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 01:06:05 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/15 14:59:35 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/22 10:36:30 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
+
+int	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (*s)
+	{
+		i++;
+		s++;
+	}
+	return (i);
+}
 
 int	ft_check_symbol(char *s)
 {
 	int	i;
 
 	i = 0;
+	if (!ft_strlen(s))
+		ft_exit_argv();
 	while (s[i])
 	{
 		if ((s[i] < '0' || s[i] > '9') && s[i] != ' ' && s[i] != '+'
@@ -62,10 +77,10 @@ int	ft_check_double(int *mas, int length)
 	i = 0;
 	while (i < length)
 	{
-		j = 1;
+		j = i + 1;
 		while (j < length)
 		{
-			if (mas[i] == mas[i + j])
+			if (mas[i] == mas[j])
 				return (1);
 			j++;
 		}

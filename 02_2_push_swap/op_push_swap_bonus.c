@@ -6,7 +6,7 @@
 /*   By: mlarra <mlarra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:51:41 by mlarra            #+#    #+#             */
-/*   Updated: 2022/02/14 16:00:34 by mlarra           ###   ########.fr       */
+/*   Updated: 2022/02/18 15:01:13 by mlarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	push(t_list **a, t_list **b)
 	{
 		temp = *a;
 		*a = (*a)->next;
-			temp->next = *b;
+		temp->next = *b;
 		*b = temp;
 	}
 }
